@@ -1,0 +1,5 @@
+projects:
+  - travis-ci/travis-ci
+  - rails/rails
+  - sinatra/sinatra
+  - bundler/bundler

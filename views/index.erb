@@ -1,0 +1,31 @@
+<% @repos.each do |trio| %>
+  <div class="row">
+    <% trio.each do |repo| %>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="panel panel-<%=@states["#{repo.recent_builds[0].state}"] %>">
+              <div class="panel-heading">
+                <%= "#{repo.recent_builds[0].repository.name}" %>
+              </div>
+              <div class="panel-body">
+                <%= " #{repo.recent_builds[0].number} -
+                #{repo.recent_builds[0].branch_info}" %></br>
+                      <%= " #{repo.recent_builds[0].state} -
+                      #{repo.recent_builds[0].commit.committer_name}"%></br>
+                      <%= "Started: #{repo.recent_builds[0].started_at.strftime("%d/%m/%y @ %H:%M ")}" unless repo.recent_builds[0].started_at.nil? %></br>
+                <%= "Duration: #{Time.at(repo.recent_builds[0].duration).utc.strftime("%H:%M:%S")}" unless repo.recent_builds[0].duration.nil? %>
+              </div>      
+            </div>
+            <% repo.recent_builds[1..5].each do |build| %>
+              <span class="label label-<%= @states["#{build.state}"] %>"><%= build.number %></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<script type="text/javascript">                                                                   
+  setTimeout(function () { location.reload(true); }, 20000);
+</script> 
