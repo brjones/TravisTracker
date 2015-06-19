@@ -3,3 +3,8 @@ projects:
   - rails/rails
   - sinatra/sinatra
   - bundler/bundler
+monit:
+- :host: localhost
+  :auth: true
+  :username: admin
+  :password: admin

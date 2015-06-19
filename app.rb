@@ -2,10 +2,10 @@ require 'rubygems'
 require 'sinatra/base'
 require 'sinatra/config_file'
 require 'tilt/erb'
+require 'travis'
 
 class TravisTracker < Sinatra::Base
   register Sinatra::ConfigFile
-  require 'travis'
 
   config_file "config.yml"
 
@@ -20,3 +20,4 @@ class TravisTracker < Sinatra::Base
   end
 
 end
+
