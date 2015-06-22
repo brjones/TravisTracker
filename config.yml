@@ -5,6 +5,13 @@ projects:
   - bundler/bundler
 monit:
 - :host: localhost
+  :port: 2812
+  :auth: true
+  :username: admin
+  :password: admin
+
+- :host: localhost
+  :port: 2812
   :auth: true
   :username: admin
   :password: admin

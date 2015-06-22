@@ -1,10 +1,43 @@
+<style>
+
+body                {background: #EEEEEE;}
+
+
+.monit-application {
+  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  /*width: 210px;
+  height: 200px;*/
+  width: 15em;
+  height: 15em;
+  border: 1px solid black;
+  margin-left: 2em;
+  position:relative;
+  float: left;
+  padding-top: 0.5em;
+}
+
+.monit-application .title {
+  bottom: 0.5em;
+  right: 0.5em;
+  position: absolute;
+  font-size: x-large;
+}
+
+.monit-application .process {
+  padding-left: 1em;
+}
+
+.monit-application .process .name {
+  font-size: large;
+}
+</style>
+
 <h2>Hosts</h2>
 <div class="row">
   <% @status.each_host do |host| %>
     <div class="col-md-4">
       <div class="panel">
         <div class="panel-heading">
-          <% debugger %>
           <%= host.name %>
         </div>
         <div class="panel-body">
@@ -14,18 +47,29 @@
             </div>
           </div>
         </div>
+
     </div>
+  </div>
   <% end %>
 </div>
 <h2>Environments</h2>
 <% @status.each_environment do |environment| %>
-  <div>
-    <h3><%= environment.name %></h3>
-    <% environment.each_application do |application| %>
-      <h4><%= application.name %></h4>
-    <% end %>
-  </div>
+    <div class="panel">
+      <div class="panel-heading">
+        <h3><%= environment.name %></h3>
+      </div>
+      <div class="panel-body">
+          <% environment.each_application do |application| %>
+            <div class="monit-application">
+              <div class="title"><%= application.name %></div>
+              <% application.each_process do |name, service| %>
+                <div class="process"><span class="name"><%= name %></span></div>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
+    </div>
 <% end %>
 <script type="text/javascript">
-  setTimeout(function () { location.reload(true); }, 20000);
+  //setTimeout(function () { location.reload(true); }, 20000);
 </script>

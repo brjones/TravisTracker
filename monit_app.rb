@@ -4,13 +4,45 @@ require 'sinatra/config_file'
 require 'tilt/erb'
 require 'monit'
 
+require 'sass'
+require 'bootstrap-sass'
+
+require 'sinatra/assetpack'
+
+require 'pry'
+
+
 module MonitApp
+
 
   HOST_SERVICE_TYPE = '5'
   UNSPECIFIED_PROCESS = 'general'
   UNSPECIIFED_ENVIRONMENT = 'no_environment'
 
   class Application < Sinatra::Base
+
+    set :root, File.dirname(__FILE__) # You must set app root
+    register Sinatra::AssetPack
+
+    # assets do
+
+    #   serve '/assets/javascripts', :from => 'assets/javascripts'
+    #   serve '/assets/stylesheets', :from => 'assets/stylesheets'
+
+    #   css :application, '/assets/stylesheets/application.css', [
+    #     '/assets/stylesheets/*.css',
+    #   ]
+
+    #   js :application, '/assets/javascripts/app.js', [
+    #     '/assets/javascripts/jquery.min.js',
+    #     '/assets/javascripts/bootstrap.min.js',
+    #     '/assets/javascripts/application.js'
+    #   ]
+
+    #   js_compression :jsmin
+    #   css_compression :sass
+    # end
+
 
     register Sinatra::ConfigFile
     config_file "config.yml"
@@ -102,6 +134,11 @@ module MonitApp
       @processes << [name,service]
     end
 
+    def each_process
+      @processes.each do |name, service|
+        yield name, service
+      end
+    end
   end
 
   ##
@@ -109,7 +146,7 @@ module MonitApp
   class ServiceName
     attr_reader :environment, :application, :process
     def initialize(name)
-      name_array = name.split('/')
+      name_array = name.split('.')
       name_array << UNSPECIFIED_PROCESS if name_array.length < 3
       name_array.unshift(UNSPECIIFED_ENVIRONMENT) if name_array.length < 3
       @environment = name_array.shift.humanize

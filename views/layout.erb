@@ -4,13 +4,15 @@
 		<title>TravisTracker</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <%= css :application %>
+    <!-- %= js  :app % -->
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 		<![endif]-->
 	</head>
 	<body>
-		<div class="container">
+		<!--div class="container">
 			<nav class="navbar navbar-default" role="navigation">
 			  <div class="navbar-header">
 			    <a class="navbar-brand" href="/">TravisTracker</a>
@@ -19,7 +21,10 @@
       <div>
         <%= yield %>
 			</div>
-	  </div>
+	  </div -->
+
+    <%= yield %>
+
     <script src="/vendor/jquery-1.9.1.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
   </body>

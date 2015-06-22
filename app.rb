@@ -1,15 +1,18 @@
 require 'rubygems'
 require 'sinatra/base'
 require 'sinatra/config_file'
+require 'sinatra/assetpack'
 require 'tilt/erb'
 require 'travis'
 
 class TravisTracker < Sinatra::Base
+
   register Sinatra::ConfigFile
 
   config_file "config.yml"
 
   get '/' do
+    puts
     @states = {"failed" => "danger", "passed" => "success", "errored" => "warning", "started" => "info", "created" => "info"}
     repos = []
     settings.projects.each do |repo_name|
@@ -20,4 +23,3 @@ class TravisTracker < Sinatra::Base
   end
 
 end
-
