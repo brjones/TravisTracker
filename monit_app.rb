@@ -90,9 +90,9 @@ module MonitApp
     end
 
     def record_service(service)
-      return @hosts << service if service.service_type == HOST_SERVICE_TYPE
-      service_name = ServiceName.new(service.name)
-      environment(service_name.environment).record_service(service_name.application,service_name.process,service)
+      service_presenter = ServicePresenter.new(service)
+      return @hosts << service_presenter if service_presenter.is_host_service?
+      environment(service_presenter.environment).record_service(service_presenter.application,service_presenter.process,service_presenter)
     end
 
   end
@@ -134,24 +134,126 @@ module MonitApp
       @processes << [name,service]
     end
 
+    def state
+      @processes.all?{|name, service| service.is_success_state?}
+    end
+
+    def state_description
+      state ? 'success' : 'error'
+    end
+
+    def get_monitor(service)
+      #  service.monitor
+        # if (s->monitor == MONITOR_NOT)
+        #         snprintf(buf, buflen, "Not monitored");
+        # else if (s->monitor & MONITOR_WAITING)
+        #         snprintf(buf, buflen, "Waiting");
+        # else if (s->monitor & MONITOR_INIT)
+        #         snprintf(buf, buflen, "Initializing");
+        # else if (s->monitor & MONITOR_YES)
+        #         snprintf(buf, buflen, "Monitored");
+
+      # monitormode
+        #{"active", "passive", "manual"};
+      # pendingaction
+      #define ACTION_IGNORE      0
+#define ACTION_ALERT       1
+#define ACTION_RESTART     2
+#define ACTION_STOP        3
+#define ACTION_EXEC        4
+#define ACTION_UNMONITOR   5
+#define ACTION_START       6
+#define ACTION_MONITOR     7
+
+    end
+
+
     def each_process
+
       @processes.each do |name, service|
         yield name, service
       end
     end
   end
 
-  ##
-  # Helper class to assist with name parsing
-  class ServiceName
+  class ServicePresenter
     attr_reader :environment, :application, :process
-    def initialize(name)
-      name_array = name.split('.')
+    def initialize(service)
+      @service = service
+      name_array = service.name.split('.')
       name_array << UNSPECIFIED_PROCESS if name_array.length < 3
       name_array.unshift(UNSPECIIFED_ENVIRONMENT) if name_array.length < 3
       @environment = name_array.shift.humanize
       @application = name_array.shift.humanize
       @process     = name_array.join(' ').humanize
+    end
+
+    def is_success_state?
+      @service.state == 0
+    end
+
+    def name
+      @service.name
+    end
+
+    def state
+      is_success_state? ? 'success' : 'error'
+    end
+    def monitor_info
+      case @service.monitor
+      when 0
+        'Not monitored'
+      when 1
+        'Waiting'
+      when 2
+        'Initializing'
+      when 3
+        'Monitored'
+      end
+    end
+    def monitor_mode
+      case @service.monitormode
+      when 0
+        'Active'
+      when 1
+        'Passive'
+      when 2
+        'Manual'
+      end
+    end
+    def pending_action
+      case @service.pendingaction
+      when 0
+        'Ignore'
+      when 1
+        'Restart'
+      when 2
+        'Stop'
+      when 3
+        'Exec'
+      when 4
+        'Unmonitor'
+      when 5
+        'Start'
+      when 6
+        'Monitor'
+      end
+    end
+    def hostname
+      @service.port["hostname"]
+    end
+    def portnumber
+      @service.port["portnumber"]
+    end
+    def request
+      @service.port["request"]
+    end
+    def protocol
+      @service.port["protocol"]
+    end
+
+    def is_host_service?
+      @service.service_type == HOST_SERVICE_TYPE
     end
   end
 

@@ -14,6 +14,16 @@ body                {background: #EEEEEE;}
   position:relative;
   float: left;
   padding-top: 0.5em;
+  color: white;
+}
+
+.monit-application-success {
+  background-color: rgb(35,141,26);
+}
+
+.monit-application-error {
+  /*background-color: rgb(86,0,0);*/
+  background-color: rgb(167,7,22);
 }
 
 .monit-application .title {
@@ -30,7 +40,68 @@ body                {background: #EEEEEE;}
 .monit-application .process .name {
   font-size: large;
 }
+
+
+/**
+* gradient
+**/
+.monit-application-success {
+background: #238d1a; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjM4ZDFhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjMjM2NDFhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+background: -moz-linear-gradient(-45deg,  #238d1a 0%, #23641a 99%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#238d1a), color-stop(99%,#23641a)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  #238d1a 0%,#23641a 99%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  #238d1a 0%,#23641a 99%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  #238d1a 0%,#23641a 99%); /* IE10+ */
+background: linear-gradient(135deg,  #238d1a 0%,#23641a 99%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#238d1a', endColorstr='#23641a',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+
+/**
+// needs latest Compass, add '@import "compass"' to your scss
+background-color: #238d1a; // Old browsers
+@include filter-gradient(#238d1a, #23641a, horizontal); // IE6-8 fallback on horizontal gradient
+// IE9 SVG, needs conditional override of 'filter' to 'none'
+$experimental-support-for-svg: true;
+@include background-image(linear-gradient(left top,  #238d1a 0%,#23641a 99%));
+
+**/
+}
+
+.monit-application-error {
+background: #a70716; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYTcwNzE2IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjN2UwNzE2IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+background: -moz-linear-gradient(-45deg,  #a70716 0%, #7e0716 99%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#a70716), color-stop(99%,#7e0716)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  #a70716 0%,#7e0716 99%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  #a70716 0%,#7e0716 99%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  #a70716 0%,#7e0716 99%); /* IE10+ */
+background: linear-gradient(135deg,  #a70716 0%,#7e0716 99%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a70716', endColorstr='#7e0716',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+
+
+/**
+// needs latest Compass, add '@import "compass"' to your scss
+background-color: #a70716; // Old browsers
+@include filter-gradient(#a70716, #7e0716, horizontal); // IE6-8 fallback on horizontal gradient
+// IE9 SVG, needs conditional override of 'filter' to 'none'
+$experimental-support-for-svg: true;
+@include background-image(linear-gradient(left top, #a70716 0%,#7e0716 99%));
+**/
+}
+
+
+
 </style>
+
+<!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+<![endif]-->
 
 <h2>Hosts</h2>
 <div class="row">
@@ -60,10 +131,15 @@ body                {background: #EEEEEE;}
       </div>
       <div class="panel-body">
           <% environment.each_application do |application| %>
-            <div class="monit-application">
+            <div class="monit-application monit-application-<%= application.state_description %> ">
               <div class="title"><%= application.name %></div>
               <% application.each_process do |name, service| %>
-                <div class="process"><span class="name"><%= name %></span></div>
+                <div class="process"><span class="name"><%= name %>:</span>
+                  <%= [
+                    service.state, service.monitor_info, service.monitor_mode, service.pending_action,
+                    service.hostname, service.portnumber, service.request, service.protocol
+                    ].join(',') %>
+                </div>
               <% end %>
             </div>
           <% end %>
