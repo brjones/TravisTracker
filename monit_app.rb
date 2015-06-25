@@ -11,11 +11,13 @@ require 'sinatra/assetpack'
 
 require 'pry'
 
+require './models/monit/service_reader'
+require './models/service_presenter'
+
 
 module MonitApp
 
 
-  HOST_SERVICE_TYPE = '5'
   UNSPECIFIED_PROCESS = 'general'
   UNSPECIIFED_ENVIRONMENT = 'no_environment'
 
@@ -176,85 +178,5 @@ module MonitApp
     end
   end
 
-  class ServicePresenter
-    attr_reader :environment, :application, :process
-    def initialize(service)
-      @service = service
-      name_array = service.name.split('.')
-      name_array << UNSPECIFIED_PROCESS if name_array.length < 3
-      name_array.unshift(UNSPECIIFED_ENVIRONMENT) if name_array.length < 3
-      @environment = name_array.shift.humanize
-      @application = name_array.shift.humanize
-      @process     = name_array.join(' ').humanize
-    end
-
-    def is_success_state?
-      @service.state == 0
-    end
-
-    def name
-      @service.name
-    end
-
-    def state
-      is_success_state? ? 'success' : 'error'
-    end
-    def monitor_info
-      case @service.monitor
-      when 0
-        'Not monitored'
-      when 1
-        'Waiting'
-      when 2
-        'Initializing'
-      when 3
-        'Monitored'
-      end
-    end
-    def monitor_mode
-      case @service.monitormode
-      when 0
-        'Active'
-      when 1
-        'Passive'
-      when 2
-        'Manual'
-      end
-    end
-    def pending_action
-      case @service.pendingaction
-      when 0
-        'Ignore'
-      when 1
-        'Restart'
-      when 2
-        'Stop'
-      when 3
-        'Exec'
-      when 4
-        'Unmonitor'
-      when 5
-        'Start'
-      when 6
-        'Monitor'
-      end
-    end
-    def hostname
-      @service.port["hostname"]
-    end
-    def portnumber
-      @service.port["portnumber"]
-    end
-    def request
-      @service.port["request"]
-    end
-    def protocol
-      @service.port["protocol"]
-    end
-
-    def is_host_service?
-      @service.service_type == HOST_SERVICE_TYPE
-    end
-  end
 
 end
