@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra/base'
+require 'sinatra/assetpack'
 require 'sinatra/config_file'
 require 'tilt/erb'
 require 'monit'
@@ -7,33 +8,32 @@ require 'monit'
 require 'sass'
 require 'bootstrap-sass'
 
-require 'sinatra/assetpack'
 
 require 'pry'
 
 require './models/monit/service_reader'
+require './models/monit/host_reader'
 require './models/service_presenter'
 
 
 module MonitApp
 
 
-  UNSPECIFIED_PROCESS = 'general'
   UNSPECIIFED_ENVIRONMENT = 'no_environment'
-
+require 'sass'
   class Application < Sinatra::Base
 
     set :root, File.dirname(__FILE__) # You must set app root
     register Sinatra::AssetPack
+require 'sass'
+    assets {
+      css :application, [
+        '/css/app.css'
+       ]
 
-    # assets do
-
+      css_compression :sass
     #   serve '/assets/javascripts', :from => 'assets/javascripts'
-    #   serve '/assets/stylesheets', :from => 'assets/stylesheets'
-
-    #   css :application, '/assets/stylesheets/application.css', [
-    #     '/assets/stylesheets/*.css',
-    #   ]
+       #serve '/stylesheets', :from => 'assets/stylesheets'
 
     #   js :application, '/assets/javascripts/app.js', [
     #     '/assets/javascripts/jquery.min.js',
@@ -42,8 +42,8 @@ module MonitApp
     #   ]
 
     #   js_compression :jsmin
-    #   css_compression :sass
-    # end
+       css_compression :simple
+     }
 
 
     register Sinatra::ConfigFile
@@ -55,22 +55,36 @@ module MonitApp
     end
   end
 
+  class DeadServer
+    def initialize(config)
+      @config=config
+    end
+    def name
+      @config[:host]
+    end
+    def is_dead?
+      true
+    end
+  end
+
   ##
   # Retrieves monit status from each server provided and structures the information
   class Status
 
     def initialize(configs)
-      @servers, @hosts = [], []
+      #@servers,
+      @hosts = []
       @environments = Hash.new {|h,i| h[i] = Environment.new(i) }
       configs.each do |config|
         begin
           Monit::Status.new(config).tap do |status|
             status.get
-            @servers << status.server
+            #@servers << status.server
             status.services.each {|service| record_service(service) }
           end
         rescue Errno::ECONNREFUSED
-          @servers << DeadServer.new(config[:host])
+          @hosts << DeadServer.new(config)
+          #@servers << DeadServer.new(config[:host])
         end
       end
     end
@@ -102,6 +116,10 @@ module MonitApp
   class Environment
 
     attr_reader :name
+
+    def id
+      name.gsub(/ /,"-")
+    end
 
     def initialize(name)
       @name = name
@@ -144,39 +162,13 @@ module MonitApp
       state ? 'success' : 'error'
     end
 
-    def get_monitor(service)
-      #  service.monitor
-        # if (s->monitor == MONITOR_NOT)
-        #         snprintf(buf, buflen, "Not monitored");
-        # else if (s->monitor & MONITOR_WAITING)
-        #         snprintf(buf, buflen, "Waiting");
-        # else if (s->monitor & MONITOR_INIT)
-        #         snprintf(buf, buflen, "Initializing");
-        # else if (s->monitor & MONITOR_YES)
-        #         snprintf(buf, buflen, "Monitored");
-
-      # monitormode
-        #{"active", "passive", "manual"};
-      # pendingaction
-      #define ACTION_IGNORE      0
-#define ACTION_ALERT       1
-#define ACTION_RESTART     2
-#define ACTION_STOP        3
-#define ACTION_EXEC        4
-#define ACTION_UNMONITOR   5
-#define ACTION_START       6
-#define ACTION_MONITOR     7
-
-    end
-
 
     def each_process
-
       @processes.each do |name, service|
         yield name, service
       end
     end
-  end
 
+  end
 
 end

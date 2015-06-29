@@ -1,0 +1,13 @@
+<div class="measure-progress">
+<div class="title"><%= "#{description} (Total: #{total}#{total_units})" %></div>
+<div class="progress">
+  <% if value.to_f < 15.0 %>
+    <%= value %><%= units %>
+  <% end %>
+  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= value %>%;">
+    <% if value.to_f >= 15.0 %>
+      <%= value %><%= units %>
+    <% end %>
+  </div>
+</div>
+</div>

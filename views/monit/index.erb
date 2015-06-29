@@ -10,20 +10,23 @@ body                {background: #EEEEEE;}
   width: 15em;
   height: 15em;
   border: 1px solid black;
-  margin-left: 2em;
+  margin-right: 1em;
   position:relative;
   float: left;
   padding-top: 0.5em;
-  color: white;
+  /*color: white;*/
 }
 
+
+
 .monit-application-success {
-  background-color: rgb(35,141,26);
+  /*background-color: rgb(35,141,26);*/
+  background-color: @brand-success;
 }
 
 .monit-application-error {
-  /*background-color: rgb(86,0,0);*/
-  background-color: rgb(167,7,22);
+  /* background-color: rgb(167,7,22); */
+  background-color: @brand-danger;
 }
 
 .monit-application .title {
@@ -38,14 +41,34 @@ body                {background: #EEEEEE;}
 }
 
 .monit-application .process .name {
+  font-size: small;
+}
+
+.measure-dial .title {
+}
+
+.measure-dial {
+  width: 33%;
+  float: left;
+}
+
+.dial-panels {
+  width: 100%;
+  text-align: center;
+}
+
+.measure-dial .title {
   font-size: large;
 }
 
+.measure-progress .title {
+  font-size: large;
+}
 
 /**
 * gradient
 **/
-.monit-application-success {
+.monit-application-success2 {
 background: #238d1a; /* Old browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
 background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjM4ZDFhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjMjM2NDFhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
@@ -68,7 +91,7 @@ $experimental-support-for-svg: true;
 **/
 }
 
-.monit-application-error {
+.monit-application-error2 {
 background: #a70716; /* Old browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
 background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYTcwNzE2IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjN2UwNzE2IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
@@ -91,7 +114,21 @@ $experimental-support-for-svg: true;
 **/
 }
 
+.host .panel-heading {
+  text-align: center;
+  font-family: monospace;
+}
 
+.panel.environment .panel-heading button {
+  float: right;
+}
+.environment .title {
+  font-size: x-large;
+  display: inline-block;
+}
+
+.environment .title span {
+}
 
 </style>
 
@@ -103,44 +140,22 @@ $experimental-support-for-svg: true;
   </style>
 <![endif]-->
 
-<h2>Hosts</h2>
+<!-- h2>Hosts</h2 -->
 <div class="row">
   <% @status.each_host do |host| %>
-    <div class="col-md-4">
-      <div class="panel">
-        <div class="panel-heading">
-          <%= host.name %>
-        </div>
-        <div class="panel-body">
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-              60%
-            </div>
-          </div>
-        </div>
-
-    </div>
+    <div class="col-md-4 host">
+      <% if host.is_dead? %>
+        <%= erb(:"monit/_dead_server", :layout => false, :locals => { :host => host}) %>
+      <% else %>
+        <%= erb(:"monit/_server", :layout => false, :locals => { :host => host}) %>
+      <% end %>
   </div>
   <% end %>
 </div>
-<h2>Environments</h2>
+<!-- h2>Environments</h2 -->
 <% @status.each_environment do |environment| %>
-    <div class="panel">
-      <div class="panel-heading">
-        <h3><%= environment.name %></h3>
-      </div>
-      <div class="panel-body">
-          <% environment.each_application do |application| %>
-            <div class="monit-application monit-application-<%= application.state_description %> ">
-              <div class="title"><%= application.name %></div>
-              <% application.each_process do |name, service| %>
-                <div class="process"><span class="name"><%= name %>:</span> <%= service.description %> </div>
-              <% end %>
-            </div>
-          <% end %>
-      </div>
-    </div>
+  <%= erb(:"monit/_service", :layout => false, :locals => { :environment => environment }) %>
 <% end %>
 <script type="text/javascript">
-  //setTimeout(function () { location.reload(true); }, 20000);
+  //setTimeout(function () { location.reload(true); }, 5000);
 </script>

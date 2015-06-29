@@ -4,6 +4,7 @@
 		<title>TravisTracker</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- %= css :application % -->
     <!-- %= js  :app % -->
 		<!--[if lt IE 9]>
@@ -12,7 +13,7 @@
 		<![endif]-->
 	</head>
 	<body>
-		<!--div class="container">
+		<div class="container">
 			<nav class="navbar navbar-default" role="navigation">
 			  <div class="navbar-header">
 			    <a class="navbar-brand" href="/">TravisTracker</a>
@@ -21,11 +22,66 @@
       <div>
         <%= yield %>
 			</div>
-	  </div -->
+	  </div>
 
-    <%= yield %>
 
     <script src="/vendor/jquery-1.9.1.min.js"></script>
+    <script src="/vendor/bower-components/jquery-knob/js/jquery.knob.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/vendor/bower-components/bootstrap-modal-collapse-transition/transition.min.js"></script>
+    <script src="/vendor/bower-components/bootstrap-modal-collapse-transition/modal.min.js"></script>
+    <script src="/vendor/bower-components/bootstrap-modal-collapse-transition/collapse.min.js"></script>
+
+<script>
+function storePanelStatus() {
+  var openListStr = $(".panel-body.in").map(function() { return this.id;}).get().join(",");
+  if (typeof localStorage !== "undefined") {
+    localStorage.setItem("monit-panel", openListStr)
+  } else {
+    $.cookie("monit-panel", openListStr);
+  }
+}
+
+function loadPanelStatus() {
+  var openListStr, openList;
+  if (typeof localStorage !== "undefined") {
+    openListStr = localStorage.getItem("monit-panel")
+  } else {
+    openListStr = $.cookie("monit-panel");
+  }
+  if (openListStr !== null) {
+    openList = openListStr.split(",");
+    for (var i=0; i<openList.length; i++) {
+      $("#"+openList[i]).addClass("in");
+    }
+  }
+}
+
+$('.collapse').each(function(pos, n) {
+  $(n).on('shown.bs.collapse', function(n) {
+    return function() {
+      $(".glyphicon", n.parentNode).removeClass("glyphicon-plus");
+      $(".glyphicon", n.parentNode).addClass('glyphicon-minus');
+      storePanelStatus();
+    }
+  }(n));
+  $(n).on('hidden.bs.collapse', function(n) {
+    return function() {
+      $(".glyphicon", n.parentNode).addClass("glyphicon-plus");
+      $(".glyphicon", n.parentNode).removeClass('glyphicon-minus');
+      storePanelStatus();
+    }
+  }(n));
+});
+
+    $(function() {
+        $(".dial").knob();
+    });
+
+  loadPanelStatus();
+  setTimeout(function () { location.reload(true); }, 5000);
+
+</script>
+
   </body>
 </html>

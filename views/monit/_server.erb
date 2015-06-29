@@ -1,0 +1,20 @@
+<div class="panel">
+  <div class="panel-heading">
+    <%= host.name %>
+  </div>
+  <div class="panel-body">
+    <div class="dial-panels">
+    <%= erb(:"monit/_measure_dial", :layout => false, :locals => {
+      :value => host.cpu_user, :description => 'CPU user'}) %>
+    <%= erb(:"monit/_measure_dial", :layout => false, :locals => {
+      :value => host.cpu_system, :description => 'CPU system'}) %>
+    <%= erb(:"monit/_measure_dial", :layout => false, :locals => {
+      :value => host.load_avg5, :description => 'Load Avg5'}) %>
+    </div>
+    <div style="clear: both;"></div>
+    <%= erb(:"monit/_measure_progress_bar", :layout => false, :locals => {
+      :value => host.memory_percent, :units => "%", :total_units => "GB", :total => host.kilobyte_to_gigabyte(host.memory_kilobyte), :description => 'Memory'}) %>
+    <%= erb(:"monit/_measure_progress_bar", :layout => false, :locals => {
+      :value => host.swap_percent, :units => "%", :total_units => "GB", :total => host.kilobyte_to_gigabyte(host.swap_kilobyte), :description => 'Swap'}) %>
+  </div>
+</div>

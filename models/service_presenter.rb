@@ -1,5 +1,9 @@
 class ServicePresenter
+
   include Monit::ServiceReader
+  include Monit::HostReader
+
+  UNSPECIFIED_PROCESS = 'general'
 
   attr_reader :environment, :application, :process
   def initialize(service)
@@ -14,11 +18,20 @@ class ServicePresenter
 
 
   def name
-    @service.name
+    #service.description
+    if service_type=="TYPE_PROCESS"
+      "#{@service.name} [#{protocol}] @:#{portnumber}"
+    else
+      @service.name
+    end
   end
 
   def description
-    "#{state_description} #{service_info}"
+    "#{state_description}"
+  end
+
+  def monitoring_description
+    "#{monitor_info} #{monitor_mode} #{pending_action}"
   end
 
   def protocol

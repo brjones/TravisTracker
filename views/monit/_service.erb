@@ -1,0 +1,18 @@
+<div class="panel environment panel-default" style="">
+  <div class="panel-heading">
+    <div class="title"><span><%= environment.name %></span></div>
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= environment.id %>">
+      <span class="glyphicon glyphicon-plus collapsed-icon" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="panel-body collapse" id="<%= environment.id %>">
+      <% environment.each_application do |application| %>
+        <div class="monit-application monit-application-<%= application.state_description %> ">
+          <div class="title"><%= application.name %></div>
+          <% application.each_process do |name, service| %>
+            <div class="process"><span class="name"><%=  "#{name} [#{service.protocol}] @:#{service.portnumber}" %>:</span> <%= service.description %> </div>
+          <% end %>
+        </div>
+      <% end %>
+  </div>
+</div>

@@ -91,7 +91,7 @@ module Monit
 
     def monitor_info
       case @service.monitor.to_i
-        when 0 then 'Not monitored'
+        when 0 then 'NotMonitored'
         when 1 then 'Monitored'
         when 2 then 'Initializing'
         when 3 then 'Waiting'
@@ -133,7 +133,18 @@ module Monit
     end
   end
 
+  module TimeReader
+    def collected_sec
+      @service.collected_sec
+    end
+
+    def collected_usec
+      @service.collected_usec
+    end
+  end
+
   module ServiceReader
+    include TimeReader
     include EventReader
     include MonitorReader
   end

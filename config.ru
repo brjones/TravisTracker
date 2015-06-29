@@ -1,3 +1,4 @@
+require 'bootstrap-sass'
 require './app'
 require './monit_app'
 
