@@ -49,7 +49,7 @@ class ServicePresenter
   end
 
   def state
-    is_success_state? ? 'success' : 'error'
+    is_success_state? ? 'success' : 'danger'
   end
 
 end

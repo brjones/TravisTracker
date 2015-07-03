@@ -4,21 +4,24 @@ body                {background: #EEEEEE;}
 
 
 .monit-application {
-  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  /*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
   /*width: 210px;
   height: 200px;*/
-  width: 15em;
+  width: 25em;
   height: 15em;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   margin-right: 1em;
   position:relative;
   float: left;
-  padding-top: 0.5em;
+  /*padding-top: 0.5em;*/
   /*color: white;*/
 }
 
 
-
+.environment .panel-heading {
+  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+}
 .monit-application-success {
   /*background-color: rgb(35,141,26);*/
   background-color: @brand-success;
@@ -41,7 +44,7 @@ body                {background: #EEEEEE;}
 }
 
 .monit-application .process .name {
-  font-size: small;
+  /*font-size: small;*/
 }
 
 .measure-dial .title {
@@ -55,15 +58,62 @@ body                {background: #EEEEEE;}
 .dial-panels {
   width: 100%;
   text-align: center;
+  display: inline-block;
+-webkit-border-radius: 25px;
+-moz-border-radius: 25px;
+border-radius: 25px;
+background-color: ghostwhite;
+padding-top: 1em;
+padding-bottom: 1em;
+}
+
+.measure-dial {
 }
 
 .measure-dial .title {
-  font-size: large;
+  /*font-size: large; */
 }
 
 .measure-progress .title {
-  font-size: large;
+  /*font-size: large;*/
 }
+
+.panel .panel-heading button {
+  float: right;
+  padding: 3px 3px 3px 3px;
+  margin-left: 1em;
+}
+
+.panel.environment .panel-body {
+  padding: 0px;
+}
+
+.panel.environment {
+  float: left;
+  margin-right: 1em;
+}
+
+.panel.environment .monit-application {
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.panel.environment .monit-application .panel-body {
+  padding: 1em;
+}
+
+.panel.environment .panel-heading {
+  height: 3em;
+}
+
+.host .panel-body {
+  padding: 15px 15px 0px 15px;
+}
+
+.measure-progress {
+  margin-top: 1em;
+}
+
 
 /**
 * gradient
@@ -114,7 +164,7 @@ $experimental-support-for-svg: true;
 **/
 }
 
-.host .panel-heading {
+/*.host .panel-heading {
   text-align: center;
   font-family: monospace;
 }
@@ -129,7 +179,7 @@ $experimental-support-for-svg: true;
 
 .environment .title span {
 }
-
+*/
 </style>
 
 <!--[if gte IE 9]>
@@ -140,19 +190,23 @@ $experimental-support-for-svg: true;
   </style>
 <![endif]-->
 
-<!-- h2>Hosts</h2 -->
+<h3>Hosts</h3>
 <div class="row">
   <% @status.each_host do |host| %>
     <div class="col-md-4 host">
-      <% if host.is_dead? %>
-        <%= erb(:"monit/_dead_server", :layout => false, :locals => { :host => host}) %>
-      <% else %>
-        <%= erb(:"monit/_server", :layout => false, :locals => { :host => host}) %>
-      <% end %>
+      <!--div class="panel panel-default">
+        <div class="panel-body" -->
+              <% if host.is_dead? %>
+                <%= erb(:"monit/_dead_server", :layout => false, :locals => { :host => host}) %>
+              <% else %>
+                <%= erb(:"monit/_server", :layout => false, :locals => { :host => host}) %>
+              <% end %>
+        <!-- /div>
+      </div -->
   </div>
   <% end %>
 </div>
-<!-- h2>Environments</h2 -->
+<h3>Environments</h3>
 <% @status.each_environment do |environment| %>
   <%= erb(:"monit/_service", :layout => false, :locals => { :environment => environment }) %>
 <% end %>

@@ -140,6 +140,11 @@ require 'sass'
       end
     end
 
+    def state_description
+      return "success" if @applications.values.map(&:state_description).all?{|v| v=="success"}
+      return "danger"
+    end
+
   end
 
   class MonitoredApplication
@@ -159,7 +164,7 @@ require 'sass'
     end
 
     def state_description
-      state ? 'success' : 'error'
+      state ? 'success' : 'danger'
     end
 
 
