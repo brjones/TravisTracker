@@ -53,8 +53,10 @@ function loadPanelStatus() {
     openList = openListStr.split(",");
     for (var i=0; i<openList.length; i++) {
       var n = $("#"+openList[i]);
-      n.addClass("in");
-      collapseIcon(n[0]);
+      if (n.length>0) {
+        n.addClass("in");
+        collapseIcon(n[0]);
+      }
     }
   }
 }
@@ -88,12 +90,16 @@ $('.collapse').each(function(pos, n) {
   }(n));
 });
 
+$("dl > *").each(function(pos, n) {
+  $(n).attr("title", $(n).text());
+});
+
     $(function() {
         $(".dial").knob();
     });
 
   loadPanelStatus();
-  //setTimeout(function () { location.reload(true); }, 5000);
+  setTimeout(function () { location.reload(true); }, 20000);
 
 </script>
 

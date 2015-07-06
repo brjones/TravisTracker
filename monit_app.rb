@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'sinatra/base'
-require 'sinatra/assetpack'
 require 'sinatra/config_file'
 require 'tilt/erb'
 require 'monit'
@@ -11,6 +10,7 @@ require 'bootstrap-sass'
 
 require 'pry'
 
+require './models/monit/reader'
 require './models/monit/service_reader'
 require './models/monit/host_reader'
 require './models/service_presenter'
@@ -20,36 +20,13 @@ module MonitApp
 
 
   UNSPECIIFED_ENVIRONMENT = 'no_environment'
-require 'sass'
   class Application < Sinatra::Base
-
-    set :root, File.dirname(__FILE__) # You must set app root
-    register Sinatra::AssetPack
-require 'sass'
-    assets {
-      css :application, [
-        '/css/app.css'
-       ]
-
-      css_compression :sass
-    #   serve '/assets/javascripts', :from => 'assets/javascripts'
-       #serve '/stylesheets', :from => 'assets/stylesheets'
-
-    #   js :application, '/assets/javascripts/app.js', [
-    #     '/assets/javascripts/jquery.min.js',
-    #     '/assets/javascripts/bootstrap.min.js',
-    #     '/assets/javascripts/application.js'
-    #   ]
-
-    #   js_compression :jsmin
-       css_compression :simple
-     }
-
 
     register Sinatra::ConfigFile
     config_file "config.yml"
 
     get '/' do
+      settings.token_excluding_list.each {|name| ServicePresenter.add_name_to_token_excluding_list(name) }
       @status = Status.new(settings.monit)
       erb :'monit/index'
     end
@@ -78,13 +55,15 @@ require 'sass'
       configs.each do |config|
         begin
           Monit::Status.new(config).tap do |status|
-            status.get
-            #@servers << status.server
-            status.services.each {|service| record_service(service) }
+            valid = status.get
+            if valid
+              status.services.each {|service| record_service(service) }
+            else
+              @hosts << DeadServer.new(config)
+            end
           end
         rescue Errno::ECONNREFUSED
           @hosts << DeadServer.new(config)
-          #@servers << DeadServer.new(config[:host])
         end
       end
     end
@@ -121,9 +100,13 @@ require 'sass'
       name.gsub(/ /,"-")
     end
 
+    def ref_name
+      id
+    end
+
     def initialize(name)
       @name = name
-      @applications = Hash.new {|h,i| h[i] = MonitoredApplication.new(i) }
+      @applications = Hash.new {|h,i| h[i] = MonitoredApplication.new(i, self) }
     end
 
     def application(name)
@@ -150,8 +133,13 @@ require 'sass'
   class MonitoredApplication
     attr_reader :name
 
-    def initialize(name)
+    def ref_name
+      @environment.ref_name + name
+    end
+
+    def initialize(name, environment)
       @name = name
+      @environment = environment
       @processes = []
     end
 

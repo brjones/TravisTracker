@@ -1,5 +1,10 @@
 module Monit
   module HostReader
+
+    def ref_name
+      name.gsub(/\./, "-")
+    end
+
     def is_dead?
       false
     end

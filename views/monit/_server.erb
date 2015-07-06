@@ -1,11 +1,11 @@
           <div class="panel panel-success">
-            <div class="panel-heading">
-    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= host.name.gsub(/\./, "-") %>">
-      <span class="glyphicon glyphicon-plus collapsed-icon" id="glyphicon-<%= host.name.gsub(/\./, "-") %>" aria-hidden="true"></span>
+            <div class="panel-heading"  data-toggle="collapse" data-target="#<%= host.ref_name %>">
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= host.ref_name %>">
+      <span class="glyphicon glyphicon-plus collapsed-icon" id="glyphicon-<%= host.ref_name %>" aria-hidden="true"></span>
     </button>
               <%= "#{host.name}" %>
             </div>
-            <div class="panel-body collapse" id="<%= host.name.gsub(/\./, "-") %>">
+            <div class="panel-body collapse" id="<%= host.ref_name %>">
 
               <div class="panel">
                 <div class="panel-body">
