@@ -4,17 +4,11 @@ body                {background: #EEEEEE;}
 
 
 .monit-application {
-  /*font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;*/
-  /*width: 210px;
-  height: 200px;*/
-  width: 25em;
-  height: 15em;
-  /*border: 1px solid black;*/
+  /*width: 25em;*/
+  /*height: 15em;*/
   margin-right: 1em;
   position:relative;
   float: left;
-  /*padding-top: 0.5em;*/
-  /*color: white;*/
 }
 
 
@@ -107,103 +101,46 @@ padding-bottom: 1em;
 }
 
 .host .panel-body {
-  padding: 15px 15px 0px 15px;
+  padding: 0em 0.5em;
 }
 
 .measure-progress {
-  margin-top: 1em;
+  margin-top: 0.5em;
 }
 
-
-/**
-* gradient
-**/
-.monit-application-success2 {
-background: #238d1a; /* Old browsers */
-/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMjM4ZDFhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjMjM2NDFhIiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-background: -moz-linear-gradient(-45deg,  #238d1a 0%, #23641a 99%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#238d1a), color-stop(99%,#23641a)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(-45deg,  #238d1a 0%,#23641a 99%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(-45deg,  #238d1a 0%,#23641a 99%); /* Opera 11.10+ */
-background: -ms-linear-gradient(-45deg,  #238d1a 0%,#23641a 99%); /* IE10+ */
-background: linear-gradient(135deg,  #238d1a 0%,#23641a 99%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#238d1a', endColorstr='#23641a',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
-
-/**
-// needs latest Compass, add '@import "compass"' to your scss
-background-color: #238d1a; // Old browsers
-@include filter-gradient(#238d1a, #23641a, horizontal); // IE6-8 fallback on horizontal gradient
-// IE9 SVG, needs conditional override of 'filter' to 'none'
-$experimental-support-for-svg: true;
-@include background-image(linear-gradient(left top,  #238d1a 0%,#23641a 99%));
-
-**/
+div.environment {
+  width: 100%;
 }
 
-.monit-application-error2 {
-background: #a70716; /* Old browsers */
-/* IE9 SVG, needs conditional override of 'filter' to 'none' */
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjYTcwNzE2IiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iOTklIiBzdG9wLWNvbG9yPSIjN2UwNzE2IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-background: -moz-linear-gradient(-45deg,  #a70716 0%, #7e0716 99%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#a70716), color-stop(99%,#7e0716)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(-45deg,  #a70716 0%,#7e0716 99%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(-45deg,  #a70716 0%,#7e0716 99%); /* Opera 11.10+ */
-background: -ms-linear-gradient(-45deg,  #a70716 0%,#7e0716 99%); /* IE10+ */
-background: linear-gradient(135deg,  #a70716 0%,#7e0716 99%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a70716', endColorstr='#7e0716',GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
-
-
-/**
-// needs latest Compass, add '@import "compass"' to your scss
-background-color: #a70716; // Old browsers
-@include filter-gradient(#a70716, #7e0716, horizontal); // IE6-8 fallback on horizontal gradient
-// IE9 SVG, needs conditional override of 'filter' to 'none'
-$experimental-support-for-svg: true;
-@include background-image(linear-gradient(left top, #a70716 0%,#7e0716 99%));
-**/
+.monit-application .collapsed-panel {
+  width: 13.5em;
 }
 
-/*.host .panel-heading {
-  text-align: center;
-  font-family: monospace;
+.container {
+  width: 100%;
 }
 
-.panel.environment .panel-heading button {
-  float: right;
-}
-.environment .title {
-  font-size: x-large;
-  display: inline-block;
+h3 {
+  display: none;
 }
 
-.environment .title span {
+.navbar {
+  display: none;
 }
-*/
+
 </style>
 
-<!--[if gte IE 9]>
-  <style type="text/css">
-    .gradient {
-       filter: none;
-    }
-  </style>
-<![endif]-->
 
 <h3>Hosts</h3>
 <div class="row">
   <% @status.each_host do |host| %>
     <div class="col-md-4 host">
-      <!--div class="panel panel-default">
-        <div class="panel-body" -->
-              <% if host.is_dead? %>
-                <%= erb(:"monit/_dead_server", :layout => false, :locals => { :host => host}) %>
-              <% else %>
-                <%= erb(:"monit/_server", :layout => false, :locals => { :host => host}) %>
-              <% end %>
-        <!-- /div>
-      </div -->
-  </div>
+      <% if host.is_dead? %>
+        <%= erb(:"monit/_dead_server", :layout => false, :locals => { :host => host}) %>
+      <% else %>
+        <%= erb(:"monit/_server", :layout => false, :locals => { :host => host}) %>
+      <% end %>
+    </div>
   <% end %>
 </div>
 <h3>Environments</h3>

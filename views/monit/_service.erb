@@ -1,40 +1,33 @@
           <div class="panel panel-<%= environment.state_description %> environment">
             <div class="panel-heading">
-    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= environment.id %>">
-      <span class="glyphicon glyphicon-plus collapsed-icon" aria-hidden="true"></span>
-    </button>
-              <%= "#{environment.name}" %>
-
+              <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= environment.id %>">
+                <span class="glyphicon glyphicon-plus collapsed-icon" id="glyphicon-<%= environment.id %>" aria-hidden="true"></span>
+              </button>
+              <span class="name"><%= "#{environment.name}" %></span>
             </div>
             <div class="panel-body">
 
 
-  <div class="panel-body collapse" id="<%= environment.id %>">
-      <% environment.each_application do |application| %>
-
-          <div class="panel panel-<%= application.state_description %> monit-application">
-            <div class="panel-heading">
-              <%= application.name %>
-            </div>
-            <div class="panel-body">
-              <dl class="dl-horizontal">
-          <% application.each_process do |name, service| %>
-          <dt><%=  "#{name} [#{service.protocol}] @:#{service.portnumber}" %></dt>
-          <dd><%= service.description %></dd>
-            <!-- div class="process">
-              <span class="name"><%=  "#{name} [#{service.protocol}] @:#{service.portnumber}" %>:</span> <%= service.description %>
-            </div -->
-          <% end %>
-            </dl>
-           </div>
-        </div>
-      <% end %>
-
-
-
+              <div class="panel-body collapse" id="<%= environment.id %>">
+                <% environment.each_application do |application| %>
+                  <div class="panel panel-<%= application.state_description %> monit-application">
+                    <div class="panel-heading collapsed-panel">
+                       <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= environment.id+application.name %>">
+                        <span class="glyphicon glyphicon-plus collapsed-icon" id="glyphicon-<%= environment.id+application.name %>" aria-hidden="true"></span>
+                      </button>
+                      <%= application.name %>
+                    </div>
+                    <div class="panel-body collapse" id="<%= environment.id+application.name %>">
+                      <dl class="dl-horizontal">
+                        <% application.each_process do |name, service| %>
+                          <dt><%=  "#{name} [#{service.protocol}] @:#{service.portnumber}" %></dt>
+                          <dd><%= service.description %></dd>
+                        <% end %>
+                      </dl>
+                   </div>
+                </div>
+              <% end %>
             </div>
           </div>
-
-
         </div>
         <span class="label label-default"></span>

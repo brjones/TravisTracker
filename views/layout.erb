@@ -54,32 +54,36 @@ function loadPanelStatus() {
     for (var i=0; i<openList.length; i++) {
       var n = $("#"+openList[i]);
       n.addClass("in");
-      collapseIcon(n[0],true);
+      collapseIcon(n[0]);
     }
   }
 }
 
-function collapseIcon(n, collapseEnable) {
-  if (collapseEnable) {
-      $(".glyphicon", n.parentNode.parentNode).removeClass("glyphicon-plus");
-      $(".glyphicon", n.parentNode.parentNode).addClass('glyphicon-minus');
+function collapseIcon(n) {
+  var node = $(document.getElementById("glyphicon-"+n.id));
+  node.toggleClass("glyphicon-plus").toggleClass('glyphicon-minus');
+  var titleNode = node.parent().parent();
+  if (node.hasClass('glyphicon-minus')) {
+    titleNode.removeClass("collapsed-panel");
   } else {
-      $(".glyphicon", n.parentNode.parentNode).addClass("glyphicon-plus");
-      $(".glyphicon", n.parentNode.parentNode).removeClass('glyphicon-minus');
+    titleNode.addClass("collapsed-panel");
   }
+  return node;
 }
 
 $('.collapse').each(function(pos, n) {
   $(n).on('shown.bs.collapse', function(n) {
-    return function() {
-      collapseIcon(n, true);
+    return function(e) {
+      collapseIcon(n);
       storePanelStatus();
+      return false;
     }
   }(n));
   $(n).on('hidden.bs.collapse', function(n) {
-    return function() {
-      collapseIcon(n, false);
+    return function(e) {
+      collapseIcon(n);
       storePanelStatus();
+      return false;
     }
   }(n));
 });

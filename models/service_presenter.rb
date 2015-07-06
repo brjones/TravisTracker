@@ -8,7 +8,8 @@ class ServicePresenter
   attr_reader :environment, :application, :process
   def initialize(service)
     @service = service
-    name_array = service.name.split('_').map{|s| s.split('.')}.flatten
+    name = service.name.gsub(/next_release/,"nextrelease")
+    name_array = name.split('_').map{|s| s.split('.')}.flatten
     name_array << UNSPECIFIED_PROCESS if name_array.length < 3
     #binding.pry
     name_array.unshift(UNSPECIIFED_ENVIRONMENT) if name_array.length < 3
@@ -37,21 +38,21 @@ class ServicePresenter
 
   def protocol
     return '' if @service.port.nil?
-    unless @service.port.length.nil?
+    if @service.port.kind_of? Array
       return @service.port[0]['protocol']
     end
     @service.port['protocol']
   end
   def portnumber
     return '' if @service.port.nil?
-    unless @service.port.length.nil?
+    if @service.port.kind_of? Array
       return @service.port[0]['portnumber']
     end
     @service.port['portnumber']
   end
   def hostname
     return '' if @service.port.nil?
-    unless @service.port.length.nil?
+    if @service.port.kind_of? Array
       return @service.port[0]['hostname']
     end
     @service.port['hostname']
