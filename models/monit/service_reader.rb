@@ -3,17 +3,26 @@ module Monit
     def hostname
       @service.port["hostname"]
     end
-    def portnumber
-      @service.port["portnumber"]
-    end
-    def request
-      @service.port["request"]
-    end
     def protocol
-      @service.port["protocol"]
+      return '' if @service.port.nil?
+      if @service.port.kind_of? Array
+        return @service.port[0]['protocol']
+      end
+      @service.port['protocol']
     end
-    def is_host_service?
-      service_type == 'TYPE_SYSTEM'
+    def portnumber
+      return '' if @service.port.nil?
+      if @service.port.kind_of? Array
+        return @service.port[0]['portnumber']
+      end
+      @service.port['portnumber']
+    end
+    def hostname
+      return '' if @service.port.nil?
+      if @service.port.kind_of? Array
+        return @service.port[0]['hostname']
+      end
+      @service.port['hostname']
     end
   end
 end
