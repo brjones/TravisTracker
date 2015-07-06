@@ -137,6 +137,11 @@ h3 {
   display: none;
 }
 
+.footer {
+  position: absolute;
+  bottom: 1em;
+}
+
 </style>
 
 
@@ -156,6 +161,6 @@ h3 {
 <% @status.each_environment do |environment| %>
   <%= erb(:"monit/_service", :layout => false, :locals => { :environment => environment }) %>
 <% end %>
-<script type="text/javascript">
-  //setTimeout(function () { location.reload(true); }, 5000);
-</script>
+<div class="footer">
+Last updated: <%= Time.now %>
+</div>
