@@ -61,5 +61,5 @@ $("dl > *").each(function(pos, n) {
 
 
   loadPanelStatus();
-  //setTimeout(function () { location.reload(true); }, 20000);
+  setTimeout(function () { location.reload(true); }, 20000);
 
