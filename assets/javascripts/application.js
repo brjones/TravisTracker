@@ -59,9 +59,6 @@ $("dl > *").each(function(pos, n) {
   $(n).attr("title", $(n).text());
 });
 
-    $(function() {
-        $(".dial").knob();
-    });
 
   loadPanelStatus();
   //setTimeout(function () { location.reload(true); }, 20000);
