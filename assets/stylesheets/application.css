@@ -135,7 +135,18 @@ h3 {
   display: none;
 }
 
+.load-average {
+  padding-top: 0.2em;
+  width: 100%;
+}
+
+.avg {
+  width: 33%;
+  float: left;
+}
+
 .footer {
   position: fixed;
   bottom: 1em;
+  right: 1em;
 }

@@ -31,6 +31,10 @@ module Monit
       @service.system["cpu"]["system"]
     end
 
+    def cpu_user_plus_system
+      "%0.2f" % (cpu_user.to_f + cpu_system.to_f)
+    end
+
     def memory_percent
       @service.system["memory"]["percent"]
     end
