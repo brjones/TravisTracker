@@ -25,6 +25,7 @@ module MonitApp
     register Sinatra::ConfigFile
     config_file "config.yml"
 
+
     get '/' do
       settings.token_excluding_list.each {|name| ServicePresenter.add_name_to_token_excluding_list(name) }
       @status = Status.new(settings.monit)

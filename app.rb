@@ -10,6 +10,8 @@ class TravisTracker < Sinatra::Base
 
   config_file "config.yml"
 
+  set :public_folder, 'assets'
+
   get '/' do
     @states = {"failed" => "danger", "passed" => "success", "errored" => "warning", "started" => "info", "created" => "info"}
     repos = []

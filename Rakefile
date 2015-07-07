@@ -4,13 +4,10 @@ require './monit_app'
 APP_FILE  = './app.rb'
 APP_CLASS = 'MonitApp::Application'
 
-require 'sinatra/assetpack/rake'
+ task :default => 'build'
 
-
-#namespace :build do
-#  task :assets => ['assetpack:build'] do
-#    `cp -r $(bundle show bootstrap-sass)/vendor/assets/fonts/bootstrap public/assets/stylesheets/`
-#  end
-
-#end
+task :build do
+  `cp -r ./assets/stylesheets ./public/`
+  `cp -r ./assets/javascripts ./public/`
+end
 

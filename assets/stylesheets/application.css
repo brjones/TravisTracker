@@ -1,0 +1,141 @@
+body                {background: #EEEEEE;}
+
+
+.monit-application {
+  /*width: 25em;*/
+  /*height: 15em;*/
+  margin-right: 1em;
+  position:relative;
+  float: left;
+}
+
+
+.environment .panel-heading {
+  font-family: 'Segoe UI', Frutiger, 'Frutiger Linotype', 'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+  text-transform: uppercase;
+}
+.monit-application-success {
+  /*background-color: rgb(35,141,26);*/
+  background-color: @brand-success;
+}
+
+.monit-application-error {
+  /* background-color: rgb(167,7,22); */
+  background-color: @brand-danger;
+}
+
+.monit-application .title {
+  bottom: 0.5em;
+  right: 0.5em;
+  position: absolute;
+  font-size: x-large;
+}
+
+.monit-application .process {
+  padding-left: 1em;
+}
+
+.monit-application .process .name {
+  /*font-size: small;*/
+}
+
+.measure-dial .title {
+}
+
+.measure-dial {
+  width: 33%;
+  float: left;
+}
+
+.dial-panels {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+-webkit-border-radius: 25px;
+-moz-border-radius: 25px;
+border-radius: 25px;
+background-color: ghostwhite;
+padding-top: 1em;
+padding-bottom: 1em;
+}
+
+.measure-dial {
+}
+
+.measure-dial .title {
+  /*font-size: large; */
+}
+
+.measure-progress .title {
+  /*font-size: large;*/
+}
+
+.panel .panel-heading button {
+  float: right;
+  padding: 3px 3px 3px 3px;
+  margin-left: 1em;
+}
+
+.panel.environment .panel-body {
+  padding: 0px;
+}
+
+.panel.environment {
+  float: left;
+  margin-right: 1em;
+}
+
+.panel.environment .monit-application {
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
+.panel.environment .monit-application .panel-body {
+  padding: 1em;
+}
+
+.panel.environment .panel-heading {
+  height: 3em;
+}
+
+.host .panel-body {
+  padding: 0em 0.5em;
+}
+
+.measure-progress {
+  margin-top: 0.5em;
+}
+
+div.environment {
+  width: 100%;
+}
+
+.environment .collapsed-panel {
+  /*width: 16em;*/
+}
+
+.monit-application .collapsed-panel {
+  width: 16em;
+}
+
+.container {
+  width: 100%;
+}
+
+.panel-heading:hover {
+  font-weight: bolder;
+  cursor: pointer;
+}
+
+h3 {
+  display: none;
+}
+
+.navbar {
+  display: none;
+}
+
+.footer {
+  position: fixed;
+  bottom: 1em;
+}
