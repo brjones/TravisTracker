@@ -1,0 +1,35 @@
+          <div class="panel panel-success">
+            <div class="panel-heading"  data-toggle="collapse" data-target="#<%= host.ref_name %>">
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= host.ref_name %>">
+      <span class="glyphicon glyphicon-plus collapsed-icon" id="glyphicon-<%= host.ref_name %>" aria-hidden="true"></span>
+    </button>
+              <%= "#{host.name}" %>
+            </div>
+            <div class="panel-body collapse" id="<%= host.ref_name %>">
+
+              <div class="panel">
+                <div class="panel-body">
+                  <div class="load-average">
+                    <div class="avg"><span class="title">Avg1:</span> <span class="value"><%= host.load_avg1%></span></div>
+                    <div class="avg"><span class="title">Avg5:</span> <span class="value"><%= host.load_avg5 %></span></div>
+                    <div class="avg"><span class="title">Avg15:</span> <span class="value"><%= host.load_avg15 %></span></div>
+                  </div>
+                  <%= erb(:"monit/_measure_progress_bar", :layout => false, :locals => {
+                    :values => [host.cpu_system, host.cpu_user], :units => "%", :total_units => "%", :total => host.cpu_user_plus_system, :description => 'CPU (%sys, %usr)'}) %>
+
+                  <%= erb(:"monit/_measure_progress_bar", :layout => false, :locals => {
+                    :values => [host.memory_percent], :units => "%", :total_units => "GB", :total => host.kilobyte_to_gigabyte(host.memory_kilobyte), :description => 'Memory'}) %>
+                  <%= erb(:"monit/_measure_progress_bar", :layout => false, :locals => {
+                    :values => [host.swap_percent], :units => "%", :total_units => "GB", :total => host.kilobyte_to_gigabyte(host.swap_kilobyte), :description => 'Swap'}) %>
+                  <div style="clear: both;"></div>
+                  <!-- div class="dial-panels">
+
+                  <%= erb(:"monit/_measure_dial", :layout => false, :locals => {
+                    :value => host.load_avg5, :description => 'Load Avg5'}) %>
+                  </div -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <span class="label label-default"></span>

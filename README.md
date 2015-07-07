@@ -1,5 +1,5 @@
 # TravisTracker
-TravisTracker is a sinatra + bootstrap app for displaying the status of travis-ci builds for multiple respositories.   
+TravisTracker is a sinatra + bootstrap app for displaying the status of travis-ci builds for multiple respositories and monit status from multiple servers.
 
 ## Installation
 
@@ -15,11 +15,20 @@ Run bundle install to install the gems:
 
 `bundle install`
 
-Run the app:
+Run bower install to install all the Javascript dependencies:
 
-`bundle exec ruby app.rb`
+`bower install`
 
-Go to `localhost:4567` in your browser and it should just work...
+Execute the assets generation (currently just copies CSS and JS files
+ into /public)
+
+`rake`
+
+Run the web server:
+
+`rackup`
+
+Go to `localhost:9292` in your browser and it should just work...
 
 ##Configuration
 

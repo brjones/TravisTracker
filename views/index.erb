@@ -15,7 +15,7 @@
                       #{repo.recent_builds[0].commit.committer_name}"%></br>
                       <%= "Started: #{repo.recent_builds[0].started_at.strftime("%d/%m/%y @ %H:%M ")}" unless repo.recent_builds[0].started_at.nil? %></br>
                 <%= "Duration: #{Time.at(repo.recent_builds[0].duration).utc.strftime("%H:%M:%S")}" unless repo.recent_builds[0].duration.nil? %>
-              </div>      
+              </div>
             </div>
             <% repo.recent_builds[1..5].each do |build| %>
               <span class="label label-<%= @states["#{build.state}"] %>"><%= build.number %></span>
@@ -26,6 +26,3 @@
     <% end %>
   </div>
 <% end %>
-<script type="text/javascript">                                                                   
-  setTimeout(function () { location.reload(true); }, 20000);
-</script> 

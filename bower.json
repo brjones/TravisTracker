@@ -1,0 +1,7 @@
+{
+  "name": "TravisTracker",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap-modal-collapse-transition": "latest"
+  }
+}

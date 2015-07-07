@@ -1,0 +1,19 @@
+<h3>Hosts</h3>
+<div class="row">
+  <% @status.each_host do |host| %>
+    <div class="col-md-4 host">
+      <% if host.is_dead? %>
+        <%= erb(:"monit/_dead_server", :layout => false, :locals => { :host => host}) %>
+      <% else %>
+        <%= erb(:"monit/_server", :layout => false, :locals => { :host => host}) %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<h3>Environments</h3>
+<% @status.each_environment do |environment| %>
+  <%= erb(:"monit/_service", :layout => false, :locals => { :environment => environment }) %>
+<% end %>
+<div class="footer">
+Last updated: <%= Time.now %>
+</div>

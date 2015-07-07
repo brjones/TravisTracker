@@ -1,0 +1,33 @@
+          <div class="panel panel-<%= environment.state_description %> environment">
+            <div class="panel-heading collapsed-panel" data-toggle="collapse" data-target="#<%= environment.ref_name %>">
+              <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= environment.ref_name %>">
+                <span class="glyphicon glyphicon-plus collapsed-icon" id="glyphicon-<%= environment.ref_name %>" aria-hidden="true"></span>
+              </button>
+              <span class="name"><%= "#{environment.name}" %></span>
+            </div>
+            <div class="panel-body">
+
+
+              <div class="panel-body collapse" id="<%= environment.ref_name %>">
+                <% environment.each_application do |application| %>
+                  <div class="panel panel-<%= application.state_description %> monit-application">
+                    <div class="panel-heading collapsed-panel" data-toggle="collapse" data-target="#<%= application.ref_name %>">
+                       <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#<%= application.ref_name %>">
+                        <span class="glyphicon glyphicon-plus collapsed-icon" id="glyphicon-<%= application.ref_name %>" aria-hidden="true"></span>
+                      </button>
+                      <%= application.name %>
+                    </div>
+                    <div class="panel-body collapse" id="<%= application.ref_name %>">
+                      <dl class="dl-horizontal">
+                        <% application.each_process do |name, service| %>
+                          <dt><%=  "#{name} [#{service.protocol}] @:#{service.portnumber}" %></dt>
+                          <dd><%= service.description %></dd>
+                        <% end %>
+                      </dl>
+                   </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <span class="label label-default"></span>
